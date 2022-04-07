@@ -1,6 +1,6 @@
 import {createAction, handleActions} from "redux-actions";
 import {produce} from "immer";
-import { ACTION_TYPE_DELIMITER } from "redux-actions/lib/constants";
+import { setCookie, getCookie, deleteCookie} from "../../shared/Cookie";
 
 // actions(액션 타입)
 const LOG_IN = "LOG_IN";
@@ -15,7 +15,8 @@ const GET_USER = "GET_USER";
 const logIn = createAction(LOG_IN, (user) => ({user}));
 const logOut = createAction(LOG_OUT, (user) => ({user}));
 const getUser = createAction(GET_USER, (user) => ({user}));
-
+// action.type 하면 GET_USER가 들어오고 action.user하면 (user)값이 바로 들어온다.
+// 그런데 createActions쓰면 action.payload.user와 같이 중간에 payload가 들어간다.
 
 // initialState
 const initialState = {
@@ -48,9 +49,11 @@ export default handleActions({
     // 여기서 draft값이 원본값을 복사한 값이라고 보면 됨.
     // action안에 type, payload가 있고 이 payload에 우리가 보낸 데이터가 담긴다.
     [LOG_IN]: (state, action) => produce(state, (draft)=>{
+        setCookie("is_login", "success"); // 원래는 is_login 대신 토큰 들어가야함.
         draft.user = action.payload.user;
         draft.is_login = true;
         // is_login은 데이터 전송할 필요 없음. 바로 true하면 됨.
+        
     }),
     [LOG_OUT]: (state, action) => produce(state, (draft)=>{
         
@@ -58,7 +61,7 @@ export default handleActions({
     [GET_USER]: (state, action) => produce(state, (draft)=>{
         
     }),
-});
+}, initialState);
 
 
 // action creator export
