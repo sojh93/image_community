@@ -26,6 +26,16 @@ const initialState = {
     // 웹사이트 딱 되자마자 아무것도 안되어있을테니(로그인은 안한 상태라는 거임)
 }
 
+// middleware actions
+const loginAction = (user) => {
+    return function (dispatch, getState, {history}){
+        console.log(history);
+        //로그인 액션이 들어오면 디스패치 로그인을 해줘야하니 다음과 같이 user를 넘겨준다.
+        dispatch(logIn(user));
+        history.push('/')
+    }
+}
+
 // const reducer = (state={}, action={}) => {
 //     switch(action.type) {
 //         case "LOG_IN" : {
@@ -56,7 +66,9 @@ export default handleActions({
         
     }),
     [LOG_OUT]: (state, action) => produce(state, (draft)=>{
-        
+        deleteCookie("is_login");
+        draft.user = null;
+        draft.is_login = false;
     }),
     [GET_USER]: (state, action) => produce(state, (draft)=>{
         
@@ -69,6 +81,7 @@ const actionCreators = {
     logIn,
     logOut,
     getUser,
+    loginAction,
 };
 
 export {actionCreators};

@@ -32,7 +32,7 @@ const Image = (props) => {
 
 Image.defaultProps = {
   shape: "circle",
-  src: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
+  src: "../../public/Image/profileBird.jpg",
   size: 36,
 };
 
