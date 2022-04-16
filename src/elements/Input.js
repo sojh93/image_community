@@ -19,7 +19,7 @@ Input.defaultProps = {
     label: '텍스트',
     placeholder: '텍스트를 입력해주세요.',
     _onChange: () => {},
-    type: 'type',
+    type: 'text',
 }
 
 const ElInput = styled.input`

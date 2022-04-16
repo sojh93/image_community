@@ -36,11 +36,11 @@ const Post = (props) => {
 
 Post.defaultProps = {
   user_info: {
-    user_name: "mean0",
-    user_profile: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
+    user_name: "Mint",
+    user_profile: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbKtVzu%2Fbtrs71jQHpa%2FuBis0DOrajBQEJMSBeyZY0%2Fimg.jpg",
   },
-  image_url: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
-  contents: "고양이네요!",
+  image_url: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbKtVzu%2Fbtrs71jQHpa%2FuBis0DOrajBQEJMSBeyZY0%2Fimg.jpg",
+  contents: "살찐 멍멍이네요!",
   comment_cnt: 10,
   insert_dt: "2021-02-27 10:00:00",
 };

@@ -16,7 +16,9 @@ const SignUp = (props) => {
   const signup = () => {
 
     // 아이디 공란이거나 비밀번호 공란 혹은 닉네임 공란이면 안돼.
-    if(id === '' || pwd === '' || user_name === '') 
+    if(id === '' || pwd === '' || user_name === ''){
+      return;
+    }
 
     // 비밀번호 값이랑 비밀번호 확인 값 다르면 안돼.
     if(pwd !== pwd_check){
@@ -57,6 +59,7 @@ const SignUp = (props) => {
           <Input
             label="비밀번호"
             placeholder="비밀번호를 입력해주세요."
+            type="password"
             _onChange={(e) => {
               setPwd(e.target.value);
             }}
@@ -67,6 +70,7 @@ const SignUp = (props) => {
           <Input
             label="비밀번호 확인"
             placeholder="비밀번호를 다시 입력해주세요."
+            type="password"
             _onChange={(e) => {
               setPwdCheck(e.target.value);
             }}

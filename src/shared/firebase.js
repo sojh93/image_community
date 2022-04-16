@@ -1,6 +1,9 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 
+// apiKey를 위에 export const apiKey로 빼줄 경우 아래 config에서 apiKey:apiKey 로 해줘야함.
+// export const apiKey = "AIzaSyCqjqeI6lxjg0YQQGHse4wtkqpeq3t43pc"
+
 const firebaseConfig = {
   apiKey: "AIzaSyCqjqeI6lxjg0YQQGHse4wtkqpeq3t43pc",
   authDomain: "image-community-d6934.firebaseapp.com",
@@ -15,6 +18,7 @@ firebase.initializeApp(firebaseConfig);
 
 // 다른 파일에서 Firebase 가지고 와서 써야 돼.
 
+const apiKey = firebaseConfig.apiKey;
 const auth = firebase.auth();
 
-export {auth};
+export {auth, apiKey};
