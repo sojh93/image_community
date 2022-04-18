@@ -37,10 +37,10 @@ const Post = (props) => {
 Post.defaultProps = {
   user_info: {
     user_name: "Mint",
-    user_profile: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbKtVzu%2Fbtrs71jQHpa%2FuBis0DOrajBQEJMSBeyZY0%2Fimg.jpg",
+    user_profile: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fczo5ue%2FbtrzGL2Z0bu%2Fkb0EljU6VzlKMPX877O73k%2Fimg.jpg",
   },
-  image_url: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbKtVzu%2Fbtrs71jQHpa%2FuBis0DOrajBQEJMSBeyZY0%2Fimg.jpg",
-  contents: "살찐 멍멍이네요!",
+  image_url: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fczo5ue%2FbtrzGL2Z0bu%2Fkb0EljU6VzlKMPX877O73k%2Fimg.jpg",
+  contents: "귀여운 멍멍이네요!",
   comment_cnt: 10,
   insert_dt: "2021-02-27 10:00:00",
 };
