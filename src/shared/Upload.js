@@ -1,14 +1,16 @@
 import React from "react";
-import { storage } from "./firebase";
-
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreators as imageActions } from "../redux/modules/image";
 import { Button } from "../elements";
 
 const Upload = (props) => {
+
+    const dispatch = useDispatch();
+    const is_uploading = useSelector((state) => state.image.uploading);
+
     const fileInput = React.useRef();
 
     const selectFile = (e) => {
-        // change가 된 이벤트
-        console.log(e);
         // 인풋 그 자체
         console.log(e.target);
 
@@ -19,23 +21,15 @@ const Upload = (props) => {
     
     const uploadFB = () => {
         let image = fileInput.current.files[0];
-        const _upload = storage.ref(`images/${image.name}`).put(image);
+        dispatch(imageActions.uploadImageFB(image));
 
-
-        _upload.then((snapshot) => {
-            console.log(snapshot);
-
-            // snapshot.ref에서 다운로드 링크를 가져올 수 있음.
-            snapshot.ref.getDownloadURL().then((url) => {
-                console.log(url);
-            })
-        })
     }
 
     return (
         <React.Fragment>
             {/* 파일 리스트라는 객체(= 파일의 목록) 아래에 파일을 가지고 있다. */}
-            <input type="file" onChange={selectFile} ref={fileInput} />
+            {/* 파일이 업로드되는 도중에는 '파일선택'버튼이 disable된다. */}
+            <input type="file" onChange={selectFile} ref={fileInput} disabled={is_uploading}/>
             <Button _onClick={uploadFB}>업로드하기</Button>
         </React.Fragment>
     );
