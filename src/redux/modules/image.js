@@ -5,15 +5,18 @@ import {storage} from "../../shared/firebase";
 
 const UPLOADING = 'UPLOADING';
 const UPLOAD_IMAGE = "UPLOAD_IMAGE";
+const SET_PREVIEW = "SET_PREVIEW";
+
 
 const uploading = createAction(UPLOADING, (uploading) => ({uploading}));
 const uploadImage = createAction(UPLOAD_IMAGE, (image_url) => ({image_url}));
-
+const setPreview = createAction(SET_PREVIEW, (preview) => ({preview}));
 
 const initialState = {
 
     image_url: '',
     uploading: false,
+    preview: null,
 }
 
 const uploadImageFB = (image) => {
@@ -47,13 +50,18 @@ export default handleActions({
     [UPLOADING]: (state, action) => produce(state, (draft) => {
         draft.uploading = action.payload.uploading;
     }),
+    [SET_PREVIEW]: (state, action) => produce(state, (draft) => {
+        draft.preview = action.payload.preview;
+    })
 }, initialState);
 
 
 // UPLOADING은 해줄 필요 없음.
+// actionCreators는 액션 내보내는 곳
 const actionCreators = {
     uploadImage,
     uploadImageFB,
+    setPreview,
 };
 
 export {actionCreators};
