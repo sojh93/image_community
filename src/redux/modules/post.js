@@ -3,6 +3,9 @@ import { produce } from "immer";
 import { firestore, storage } from "../../shared/firebase";
 import moment from "moment";
 
+import { actionCreators as imageActions } from "./image";
+
+
 // SET_POST = 목록 넣어주는 애
 const SET_POST = "SET_POST";
 // ADD_POST = 목록 추가해주는 애
@@ -54,23 +57,35 @@ const addPostFB = (contents = "") => {
 
         const _upload = storage
             .ref(`images/${user_info.user_id}_${new Date().getTime()}`)
+            // putString사용해서 이미지 업로드
             .putString(_image, "data_url");
         _upload.then((snapshot) => {
             snapshot.ref.getDownloadURL().then((url) => {
                 console.log(url);
-            });
-        });
 
-        postDB
-            .add({ ...user_info, ..._post })
+                return url;
+            }).then(url => {
+                postDB
+            .add({ ...user_info, ..._post, image_url: url })
             .then((doc) => {
-                let post = { user_info, ..._post, id: doc.id };
+                let post = { user_info, ..._post, id: doc.id, image_url: url };
                 dispatch(addPost(post));
                 history.replace("/");
+
+                dispatch(imageActions.setPreview(null));
             })
             .catch((err) => {
+                window.alert('! 포스트 작성에 문제가 있어요!');
                 console.log("post 작성에 실패했어요!", err);
             });
+            }).catch((err) => {
+                window.alert("앗! 이미지 업로드에 문제가 있어요!");
+               console.log("앗! 이미지 업로드에 문제가 있어요!", err);
+            })
+        });
+        
+
+        
     };
 };
 
