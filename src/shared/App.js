@@ -11,7 +11,7 @@ import LogIn from "../pages/LogIn";
 import SignUp from "../pages/SignUp";
 import PostWrite from '../pages/PostWrite';
 import PostDetail from '../pages/PostDetail';
-
+import Search from './Search';
 
 import {Grid, Button} from "../elements";
 import Header from '../components/Header';
@@ -46,6 +46,7 @@ function App() {
           <Route path="/signup" exact component={SignUp}/>
           <Route path="/write" exact component={PostWrite}/>
           <Route path="/post/:id" exact component={PostDetail}/>
+          <Route path="/search" exact component={Search}/>
         </ConnectedRouter>
       </Grid>
       <Permit>
