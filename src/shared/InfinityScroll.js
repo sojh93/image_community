@@ -1,5 +1,6 @@
 import React from "react";
 import _ from "lodash";
+import { Spinner } from "../elements";
 
 const InfinityScroll = (props) => {
 
@@ -11,8 +12,16 @@ const InfinityScroll = (props) => {
         if(loading){
             return;
         }
+
+        const {innerHeight} = window;
+        const {scrollHeight} = document.body;
+
+        const scrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
+
+        if(scrollHeight - innerHeight - scrollTop < 200){
+            callNext();
+        }
         // 받아 온 다음에 리스트로 보내버려
-        callNext();
     }, 300);
 
     const handleScroll = React.useCallback(_handleScroll, [loading]); 
@@ -38,6 +47,8 @@ const InfinityScroll = (props) => {
     return (
         <React.Fragment>
             {props.children}
+            {/* 다음 게시글이 있을 때만 spinner 보여줘라 */}
+            {is_next && (<Spinner/>)}
         </React.Fragment>
     )
 }

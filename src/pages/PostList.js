@@ -31,7 +31,7 @@ const PostList = (props) => {
             {/* 임의로 post 하나를 p로 할 거임. */}
             <InfinityScroll
                 callNext={() =>{
-                    console.log("next!");
+                    dispatch(postActions.getPostFB(paging.next));
                 }}
                 //페이징에 next가 있니?
                 is_next={paging.next? true : false}
@@ -47,10 +47,6 @@ const PostList = (props) => {
                 }                
             })}
             </InfinityScroll>
-            <button onClick={() => {
-                    dispatch(postActions.getPostFB(paging.next));
-                }}>추가로드</button>
-
         </React.Fragment>
     )
 }
