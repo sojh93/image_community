@@ -29,7 +29,14 @@ const PostList = (props) => {
             {/* <Post/> */}
             {/* post_list.map 해서 개수만큼 이 포스트를 불러올 거임. */}
             {/* 임의로 post 하나를 p로 할 거임. */}
-            <InfinityScroll>
+            <InfinityScroll
+                callNext={() =>{
+                    console.log("next!");
+                }}
+                //페이징에 next가 있니?
+                is_next={paging.next? true : false}
+                loading={is_loading}
+            >
             {post_list.map((p, idx) => {
                 if(p.user_info.user_id === user_info?.uid){
                     return <Post key={p.id} {...p} is_me/>;    
