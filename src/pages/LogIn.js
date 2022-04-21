@@ -23,15 +23,19 @@ const Login = (props) => {
                 <Text type="heading">로그인 페이지</Text>
             </Grid>
             <Grid padding={16}>
-                <Input label="ID" placeholder="아이디를 입력하세요." _onChange={(e) => {
-                    setId(e.target.value);
-                }} />
+                <Input
+                    label="ID"
+                    placeholder="아이디를 입력하세요."
+                    _onChange={(e) => {
+                        setId(e.target.value);
+                    }}
+                />
                 <Input
                     label="PassWord"
                     type="password"
                     placeholder="비밀번호를 입력하세요."
                     _onChange={(e) => {
-                      setPwd(e.target.value);
+                        setPwd(e.target.value);
                     }}
                 />
             </Grid>
