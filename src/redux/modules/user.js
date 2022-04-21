@@ -36,14 +36,23 @@ const user_initial = {
 
 
 // middleware actions
-const loginAction = (user) => {
-    return function (dispatch, getState, {history}){
-        console.log(history);
-        //로그인 액션이 들어오면 디스패치 로그인을 해줘야하니 다음과 같이 user를 넘겨준다.
-        dispatch(setUser(user));
-        history.push('/')
-    };
-};
+const loginFB = (id, pwd) => {
+    return function (dispatch, getState, {history}) {
+        auth
+        .signInWithEmailAndPassword(id, pwd)
+        // then에는 로그인 한 다음에 뭘 할지가 들어간다.
+        .then((userCredential) => {
+            // Signed in
+            var user = userCredential.user;
+            // ...
+        })
+        .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+        });
+    }
+
+}
 
 // firebase랑 통신하는 거
 // (id, pwd, name) 받아올 거임
@@ -117,7 +126,6 @@ export default handleActions({
 const actionCreators = {
     logOut,
     getUser,
-    loginAction,
     signupFB,
 };
 
