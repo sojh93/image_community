@@ -1,7 +1,7 @@
 // PostList.js
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import { Grid } from "../elements";
 import Post from "../components/Post";
 import { actionCreators as postActions} from "../redux/modules/post";
 import InfinityScroll from "../shared/InfinityScroll";
@@ -12,6 +12,8 @@ const PostList = (props) => {
     const user_info = useSelector((state) => state.user.user);
     const is_loading = useSelector((state) => state.post.is_loading);
     const paging = useSelector((state) => state.post.paging);
+
+    const {history} = props;
 
     console.log(post_list);
 
@@ -39,11 +41,19 @@ const PostList = (props) => {
             >
             {post_list.map((p, idx) => {
                 if(p.user_info.user_id === user_info?.uid){
-                    return <Post key={p.id} {...p} is_me/>;    
+                    return (
+                    <Grid _onClick={() => {history.push(`/post/${p.id}`);}}>
+                    <Post key={p.id} {...p} is_me/>
+                    </Grid>
+                    );
                 }else{
                 // 이 p에는 게시글의 모든 정보가 들어간다.
                 // map을 해줄거라면 key 꼭 써줘야한다.
-                return <Post key={p.id} {...p}/>;
+                return (
+                    <Grid _onClick={() => {history.push(`/post/${p.id}`);}}>
+                        <Post key={p.id} {...p} is_me/>
+                    </Grid>
+                );
                 }                
             })}
             </InfinityScroll>
