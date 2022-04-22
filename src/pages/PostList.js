@@ -6,6 +6,7 @@ import Post from "../components/Post";
 import { actionCreators as postActions } from "../redux/modules/post";
 import InfinityScroll from "../shared/InfinityScroll";
 
+
 const PostList = (props) => {
     const dispatch = useDispatch();
     const post_list = useSelector((state) => state.post.list);
