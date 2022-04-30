@@ -19,15 +19,15 @@ const PostList = (props) => {
     console.log(post_list);
 
     React.useEffect(() => {
-        // post_list의 게시글 길이가 0이면 그 때 너 게시글 갖고 와
-        if (post_list.length === 0) {
+        // post_list의 게시글 길이가 2미만이면(1개면) 그 때 너 게시글 갖고 와(파이어스토어에서)
+        if (post_list.length < 2) {
             dispatch(postActions.getPostFB());
         }
     }, []);
 
     return (
         <React.Fragment>
-            <Grid bg={"#EFF6FF"} padding="20px 0px">
+            <Grid bg={"#B9A7FC"} padding="20px 0px">
 
             
             {/* <Post/> */}

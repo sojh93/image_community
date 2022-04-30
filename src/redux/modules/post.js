@@ -281,6 +281,38 @@ const getPostFB = (start = null, size = 3) => {
     };
 };
 
+const getOnePostFB = (id) => {
+    return function(dispatch, getState, {history}) {
+        const postDB = firestore.collection("post");
+        postDB.doc(id).get().then(doc => {
+            console.log(doc);
+            console.log(doc.data());
+
+            let _post = doc.data();
+            let post = Object.keys(_post).reduce(
+                (acc, cur) => {
+                    // 키 값에 user_가 포함 돼? (-1이 아니다 = 포함이 된다면)
+                    if (cur.indexOf("user_") !== -1)
+                        return {
+                            ...acc,
+                            user_info: {
+                                ...acc.user_info,
+                                [cur]: _post[cur],
+                            },
+                        };
+                    // [키]: 키에 해당하는 밸류
+                    return { ...acc, [cur]: _post[cur] };
+                    // doc.data에는 id 안들어가있으니 여기에 id 추가
+                },
+                { id: doc.id, user_info: {} }
+            );
+            // post_list, paging 가져와야하니 setpost로 배열에 추가하고 paging은 위에서 그대로 가져옴.
+                dispatch(setPost([post]), { start: null, next: null, size: 3 });
+        });
+    }
+}
+
+
 export default handleActions(
     {
         [SET_POST]: (state, action) =>
@@ -288,8 +320,26 @@ export default handleActions(
                 // draft의 list를 action.payload.post_list 로 넘어온 걸로 갈아끼울거임.
                 //... 해줘야 리스트에 있는 거 하나씩 다 들어가서 push한다.
                 draft.list.push(...action.payload.post_list);
+                // reduce사용해서 중복제거
+                draft.list = draft.list.reduce((acc, cur) => {
+                    // 중복된 값이 없다면
+                    // (acc.findIndex(a => a.id === cur.id) => 인덱스 값
+                    if(acc.findIndex(a => a.id === cur.id) === -1) {
+                    // 기존 배열(acc) 그대로 갖다 놓고, 현재값을 추가
+                        return [...acc, cur];
+                    // 중복일 경우,
+                    } else {
+                        acc[acc.findIndex(a => a.id === cur.id)] = cur;
+                        return acc;
+                    }
+                }, []);
+
+                if(action.payload.paging){
+
+                }
                 draft.paging = action.payload.paging;
                 // 다 불러왔으면 로딩은 끝나는 거니까 false처리 해준다.
+                
                 draft.is_loading = false;
             }),
         [ADD_POST]: (state, action) =>
@@ -323,6 +373,7 @@ const actionCreators = {
     getPostFB,
     addPostFB,
     editPostFB,
+    getOnePostFB,
 };
 
 export { actionCreators };
