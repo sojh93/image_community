@@ -70,7 +70,10 @@ const PostDetail = (props) => {
             <Post {...post} is_me={post.user_info.user_id === user_info?.uid}/>
             )}
             
-          
+          {/* 부모에서 무언가를 불러서 자식에게 props로 전달해주는 것을 드릴링이라고 한다. */}
+          {/* 드릴링의 단점은... 부모가 commentList를 갖고 있다가 B에게 넘겨주면  */}
+          {/* commentList 정보가 변했을 때 부모도 재렌더링, 자식도 재렌더링이 되어버림.*/}
+          {/* B가 commentList를 갖고 있다면 B만 재렌더링이 된다. */}
             <CommentWrite post_id={id}/>
             <CommentList post_id={id}/>
         </React.Fragment>
