@@ -333,7 +333,7 @@ export default handleActions(
                     // return acc만 해줘도 상관은 없음.
                         acc[acc.findIndex(a => a.id === cur.id)] = cur;
                         return acc;
-                    }
+                    } 
                 }, []);
 
                 if(action.payload.paging){
