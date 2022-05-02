@@ -4,6 +4,7 @@ import CommentList from "../components/CommentList";
 import CommentWrite from "../components/CommentWrite";
 import { useDispatch, useSelector } from "react-redux";
 // import { firestore } from "../shared/firebase";
+import Permit from "../shared/Permit";
 
 import { actionCreators as postActions} from "../redux/modules/post";
 
@@ -74,7 +75,10 @@ const PostDetail = (props) => {
           {/* 드릴링의 단점은... 부모가 commentList를 갖고 있다가 B에게 넘겨주면  */}
           {/* commentList 정보가 변했을 때 부모도 재렌더링, 자식도 재렌더링이 되어버림.*/}
           {/* B가 commentList를 갖고 있다면 B만 재렌더링이 된다. */}
-            <CommentWrite post_id={id}/>
+
+            <Permit>
+                 <CommentWrite post_id={id}/>
+            </Permit>
             <CommentList post_id={id}/>
         </React.Fragment>
     )
