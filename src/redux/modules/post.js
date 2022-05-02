@@ -307,7 +307,7 @@ const getOnePostFB = (id) => {
                 { id: doc.id, user_info: {} }
             );
             // post_list, paging 가져와야하니 setpost로 배열에 추가하고 paging은 위에서 그대로 가져옴.
-                dispatch(setPost([post]), { start: null, next: null, size: 3 });
+                dispatch(setPost([post]));
         });
     }
 }
@@ -321,6 +321,7 @@ export default handleActions(
                 //... 해줘야 리스트에 있는 거 하나씩 다 들어가서 push한다.
                 draft.list.push(...action.payload.post_list);
                 // reduce사용해서 중복제거
+                // acc는 누산된 값. cur는 현재 값.
                 draft.list = draft.list.reduce((acc, cur) => {
                     // 중복된 값이 없다면
                     // (acc.findIndex(a => a.id === cur.id) => 인덱스 값
@@ -329,15 +330,16 @@ export default handleActions(
                         return [...acc, cur];
                     // 중복일 경우,
                     } else {
+                    // return acc만 해줘도 상관은 없음.
                         acc[acc.findIndex(a => a.id === cur.id)] = cur;
                         return acc;
                     }
                 }, []);
 
                 if(action.payload.paging){
-
+                    draft.paging = action.payload.paging;
                 }
-                draft.paging = action.payload.paging;
+                
                 // 다 불러왔으면 로딩은 끝나는 거니까 false처리 해준다.
                 
                 draft.is_loading = false;

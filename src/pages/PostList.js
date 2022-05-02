@@ -27,7 +27,7 @@ const PostList = (props) => {
 
     return (
         <React.Fragment>
-            <Grid bg={"#B9A7FC"} padding="20px 0px">
+            <Grid bg="#B9A7FC" padding="20px 0px">
 
             
             {/* <Post/> */}
