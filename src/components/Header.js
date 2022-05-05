@@ -4,6 +4,7 @@ import {getCookie, deleteCookie} from "../shared/Cookie";
 // useSelector는 리덕스 훅. 스토어에 있는 값을 가져온다.
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
+import { Link } from "react-router-dom";
 
 import {history} from "../redux/configureStore";
 import { apiKey } from "../shared/firebase";
@@ -26,8 +27,10 @@ const Header = (props) => {
         return (
           <React.Fragment>
             <Grid is_flex padding="4px 16px">
-              <Grid>
-                <Text margin="0px" size="24px" bold>
+              <Grid _onClick={() => {
+              history.push("/");
+            }}>
+                <Text margin="0px" size="24px" bold >
                     정현's 블로그
                 </Text>
               </Grid>
@@ -52,8 +55,10 @@ const Header = (props) => {
       return (
         <React.Fragment>
           <Grid is_flex padding="4px 16px">
-            <Grid>
-              <Text margin="0px" size="24px" bold>
+            <Grid _onClick={() => {
+              history.push("/");
+            }}>
+              <Text margin="0px" size="24px" bold >
                 정현's 블로그
               </Text>
             </Grid>
