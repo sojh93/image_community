@@ -37,6 +37,8 @@ const Login = (props) => {
                     _onChange={(e) => {
                         setPwd(e.target.value);
                     }}
+                    onSubmit={login}
+                    is_Submit
                 />
             </Grid>
 
@@ -47,7 +49,7 @@ const Login = (props) => {
                     login();
                 }}
             >
-                로그인
+            로그인
             </Button>
         </React.Fragment>
     );

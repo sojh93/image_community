@@ -10,12 +10,23 @@ const Input = (props) => {
     return (
       <Grid>
         {label && <Text margin="0px">{label}</Text>}
-        <ElTextarea
+        
+        {is_Submit? <ElTextarea
           rows={10}
           value={value}
           placeholder={placeholder}
           onChange={_onChange}
-        ></ElTextarea>
+          onKeyPress={(e) => {
+            if(e.key === "Enter"){
+              onSubmit(e);
+            }}}
+        />
+        :<ElTextarea
+          rows={10}
+          value={value}
+          placeholder={placeholder}
+          onChange={_onChange}
+        />}
       </Grid>
     );
   }
