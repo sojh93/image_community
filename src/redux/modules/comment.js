@@ -1,6 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
-import { firestore } from "../../shared/firebase";
+import { firestore, realtime } from "../../shared/firebase";
 import "moment";
 import moment from "moment";
 import post from "./post";
@@ -72,8 +72,29 @@ const addCommentFB = (post_id, contents) => {
       // 이를 예방하기 위해 parseInt()를 활용해서 ()값을 숫자로 바꿔준다.
       // editpost는 post하나에 대한 수정을 함. comment_cnt를 수정해준다.
       if(post){
-        dispatch(postActions.editPost(post_id, {comment_cnt: parseInt(post.comment_cnt) + 1,})
+        dispatch(postActions.editPost(post_id, {comment_cnt: parseInt(post.comment_cnt) + 1,
+        })
         );
+
+
+        // 게시글을 작성한 사람한테 알람이 간다.
+        const _noti_item = realtime.ref(`noti/${post.user_info.user_id}/list`).push();
+
+        _noti_item.set({
+          post_id: post.id,
+          user_name: comment.user_name,
+          image_url: post.image_url,
+          insert_dt: comment.insert_dt
+        }, (err) => {
+          if(err){
+            console.log("알림 저장에 실패했어요!");
+          } else {
+            const notiDB = realtime.ref(`noti/${post.user_info.user_id}`)
+
+            notiDB.update({read: false});
+          }
+        });
+         
       }
       // dispatch()
     })

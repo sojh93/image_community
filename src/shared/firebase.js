@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
+import "firebase/database";
 
 // apiKey를 위에 export const apiKey로 빼줄 경우 아래 config에서 apiKey:apiKey 로 해줘야함.
 // export const apiKey = "AIzaSyCqjqeI6lxjg0YQQGHse4wtkqpeq3t43pc"
@@ -24,6 +25,6 @@ const apiKey = firebaseConfig.apiKey;
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 const storage = firebase.storage();
+const realtime = firebase.database();
 
-
-export {auth, apiKey, firestore, storage};
+export {auth, apiKey, firestore, storage, realtime};

@@ -9,6 +9,9 @@ import { Link } from "react-router-dom";
 import {history} from "../redux/configureStore";
 import { apiKey } from "../shared/firebase";
 
+import NotiBadge from "./NotiBadge";
+
+
 const Header = (props) => {
     const dispatch = useDispatch();
     const is_login = useSelector((state) => state.user.is_login)
@@ -37,9 +40,9 @@ const Header = (props) => {
     
               <Grid is_flex>
                 <Button text="내정보"></Button>
-                <Button _onClick={() => {
+                <NotiBadge _onClick={() => {
               history.push("/noti");
-            }} text="알림"></Button>
+            }} text="알림"></NotiBadge>
                 <Button
                   text="로그아웃"
                   _onClick={() => {
