@@ -31,9 +31,9 @@ const initialState = {
     // 웹사이트 딱 되자마자 아무것도 안되어있을테니(로그인은 안한 상태라는 거임)
 };
 
-const user_initial = {
-    user_name: "Mint",
-};
+// const user_initial = {
+//     user_name: "Mint",
+// };
 
 // middleware actions
 // const loginAction = (user) => {
@@ -87,6 +87,8 @@ const loginFB = (id, pwd) => {
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
+
+                console.log(errorCode, errorMessage);
             });
     };
 };
@@ -121,15 +123,19 @@ const signupFB = (id, pwd, user_name) => {
                     // ...
                 })
                 .catch((error) => {
+                    console.log(error);
+                });
+            })
+                .catch((error) => {
                     var errorCode = error.code;
                     var errorMessage = error.message;
 
                     console.log(errorCode, errorMessage);
                     // ..
                 });
-        });
+        };
     };
-};
+
 
 // const reducer = (state={}, action={}) => {
 //     switch(action.type) {

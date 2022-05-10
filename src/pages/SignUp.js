@@ -3,6 +3,7 @@ import { Grid, Text, Input, Button } from "../elements";
 
 import { useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
+import {emailCheck} from "../shared/common";
 
 
 const SignUp = (props) => {
@@ -20,6 +21,10 @@ const SignUp = (props) => {
       return;
     }
 
+    if(!emailCheck(id)){
+      window.alert("이메일 형식이 맞지 않습니다!");
+      return;
+    }
     // 비밀번호 값이랑 비밀번호 확인 값 다르면 안돼.
     if(pwd !== pwd_check){
       return;

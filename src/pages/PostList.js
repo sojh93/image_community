@@ -16,8 +16,6 @@ const PostList = (props) => {
 
     const { history } = props;
 
-    console.log(post_list);
-
     React.useEffect(() => {
         // post_list의 게시글 길이가 2미만이면(1개면) 그 때 너 게시글 갖고 와(파이어스토어에서)
         if (post_list.length < 2) {
@@ -27,7 +25,7 @@ const PostList = (props) => {
 
     return (
         <React.Fragment>
-            <Grid bg="#B9A7FC" padding="20px 0px">
+            <Grid bg={"#EFF6FF"} padding="20px 0px">
 
             
             {/* <Post/> */}
@@ -45,13 +43,13 @@ const PostList = (props) => {
                     if(p.user_info.user_id === user_info?.uid){
                         return (
                             <Grid bg="#ffffff"
-                                margin="0 0 20px 0"
+                                margin="8px 0px"
                                 key={p.id}
                                 _onClick={() => {
                                     history.push(`/post/${p.id}`);
                                 }}
                             >
-                                <Post {...p} is_me />
+                                <Post key={p.id} {...p} is_me />
                             </Grid>
                         );
                     } else {
@@ -60,11 +58,12 @@ const PostList = (props) => {
                         return (
                             <Grid
                                 key={p.id}
+                                bg="#ffffff"
                                 _onClick={() => {
                                     history.push(`/post/${p.id}`);
                                 }}
                             >
-                                <Post {...p} is_me />
+                                <Post {...p} />
                             </Grid>
                         );
                     }

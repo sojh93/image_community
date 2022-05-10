@@ -1,4 +1,5 @@
 import React from "react";
+import {storage} from "./firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreators as imageActions } from "../redux/modules/image";
 import { Button } from "../elements";

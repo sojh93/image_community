@@ -19,7 +19,7 @@ const PostWrite = (props) => {
 
     let _post = is_edit ? post_list.find((p) => p.id === post_id) : null;
 
-    const [contents, setContents] = React.useState("");
+    const [contents, setContents] = React.useState(_post ? _post.contents : "");
 
     React.useEffect(() => {
       if (is_edit && !_post) {

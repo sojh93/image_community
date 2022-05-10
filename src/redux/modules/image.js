@@ -29,7 +29,7 @@ const uploadImageFB = (image) => {
 
         _upload.then((snapshot) => {
             console.log(snapshot);
-            dispatch(uploading(false));
+            // dispatch(uploading(false));
 
             // snapshot.ref에서 다운로드 링크를 가져올 수 있음.
             snapshot.ref.getDownloadURL().then((url) => {

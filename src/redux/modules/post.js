@@ -1,6 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import { firestore, storage } from "../../shared/firebase";
+import "moment";
 import moment from "moment";
 
 import { actionCreators as imageActions } from "./image";
@@ -243,41 +244,41 @@ const getPostFB = (start = null, size = 3) => {
             dispatch(setPost(post_list, paging));
         });
 
-        return;
+        // return;
 
-        postDB.get().then((docs) => {
-            let post_list = [];
-            docs.forEach((doc) => {
-                let _post = doc.data();
+        // postDB.get().then((docs) => {
+        //     let post_list = [];
+        //     docs.forEach((doc) => {
+        //         let _post = doc.data();
 
-                // ['comment_cnt', 'contents', ..]
-                // (누산된 값, 현재 값) // (accumulator, currentValue)
-                // 키 값만 뽑아서 배열로 만들어주려고 다음 식 사용() reduce써서 예쁘게 잘 만듦.)
-                let post = Object.keys(_post).reduce(
-                    (acc, cur) => {
-                        // 키 값에 user_가 포함 돼? (-1이 아니다 = 포함이 된다면)
-                        if (cur.indexOf("user_") !== -1)
-                            return {
-                                ...acc,
-                                user_info: {
-                                    ...acc.user_info,
-                                    [cur]: _post[cur],
-                                },
-                            };
-                        // [키]: 키에 해당하는 밸류
-                        return { ...acc, [cur]: _post[cur] };
-                        // doc.data에는 id 안들어가있으니 여기에 id 추가
-                    },
-                    { id: doc.id, user_info: {} }
-                );
+        //         // ['comment_cnt', 'contents', ..]
+        //         // (누산된 값, 현재 값) // (accumulator, currentValue)
+        //         // 키 값만 뽑아서 배열로 만들어주려고 다음 식 사용() reduce써서 예쁘게 잘 만듦.)
+        //         let post = Object.keys(_post).reduce(
+        //             (acc, cur) => {
+        //                 // 키 값에 user_가 포함 돼? (-1이 아니다 = 포함이 된다면)
+        //                 if (cur.indexOf("user_") !== -1)
+        //                     return {
+        //                         ...acc,
+        //                         user_info: {
+        //                             ...acc.user_info,
+        //                             [cur]: _post[cur],
+        //                         },
+        //                     };
+        //                 // [키]: 키에 해당하는 밸류
+        //                 return { ...acc, [cur]: _post[cur] };
+        //                 // doc.data에는 id 안들어가있으니 여기에 id 추가
+        //             },
+        //             { id: doc.id, user_info: {} }
+        //         );
 
-                post_list.push(post);
-            });
+        //         post_list.push(post);
+        //     });
 
-            console.log(post_list);
+        //     console.log(post_list);
 
-            dispatch(setPost(post_list));
-        });
+        //     dispatch(setPost(post_list));
+        // });
     };
 };
 

@@ -2,8 +2,7 @@ import React from "react";
 import {Grid, Image, Text} from "../elements";
 
 import { useDispatch, useSelector } from "react-redux";
-import comment, { actionCreators as commentActions } from "../redux/modules/comment";
-import post from "../redux/modules/post";
+import { actionCreators as commentActions } from "../redux/modules/comment";
 
 const CommentList = (props) => {
   const dispatch = useDispatch();
@@ -61,9 +60,9 @@ const CommentItem = (props) => {
 
 CommentItem.defaultProps = {
     user_profile: "",
-    user_name: "mean0",
+    user_name: "sojh",
     user_id: "",
     post_id: 1,
-    contents: "귀여운 고양이네요!",
+    contents: "멈무!",
     insert_dt: '2021-01-01 19:00:00'
 }

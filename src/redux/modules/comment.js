@@ -3,7 +3,6 @@ import { produce } from "immer";
 import { firestore, realtime } from "../../shared/firebase";
 import "moment";
 import moment from "moment";
-import post from "./post";
 
 import firebase from "firebase/app";
 
@@ -53,7 +52,7 @@ const addCommentFB = (post_id, contents) => {
     commentDB.add(comment).then((doc) => {
       const postDB = firestore.collection("post");
       // 리덕스에 있는 거 가지고 온다.
-      const post = getState().post.list.find(l => l.id === post_id);
+      const post = getState().post.list.find((l) => l.id === post_id);
       // increment는 .increment(숫자) 숫자만큼을 현재 가지고 있는 값에서 추가(+)해주는 친구.
       // 댓글은 1개만 작성할 것이기 때문에 1 넣음.
       const increment = firebase.firestore.FieldValue.increment(1);

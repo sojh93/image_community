@@ -12,7 +12,6 @@ const PostDetail = (props) => {
     const dispatch = useDispatch();
     const id = props.match.params.id;
 
-    console.log(id);
     const user_info = useSelector((state) => state.user.user);
     // post에서 list를 가져온다.
     const post_list = useSelector(store => store.post.list);
@@ -24,7 +23,6 @@ const PostDetail = (props) => {
     // const [post, setPost] = React.useState(post_data? post_data : null);
 
     React.useEffect(() => {
-
         if(post){
             return;
         }
